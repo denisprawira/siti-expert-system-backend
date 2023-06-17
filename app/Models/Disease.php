@@ -23,7 +23,7 @@ class Disease extends Model
     //3. this table ID as foreign key in pivot table
     //4.  foreign key name of the model that you are joining to
     public function Symptoms(){
-        return $this->belongsToMany(Symptom::class, 'disease_symptom','disease_id','symptom_id')->withPivot('weight');
+        return $this->belongsToMany(Symptom::class, 'disease_symptoms','disease_id','symptom_id')->withPivot('weight');
        
     }
 }

@@ -16,10 +16,10 @@ class SymptomController extends Controller
         // Your code here
     }
 
+    public function getSymptomDiseases()
+    {
+        $symptoms = Symptom::with("diseases")->get();
 
-    public function getSymptomDiseases(){
-        $symptoms = Symptom::with('diseases')->get();
-        
         return response()->json($symptoms);
     }
 }

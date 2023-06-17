@@ -10,6 +10,6 @@ class Symptom extends Model
     use HasFactory;
 
     public function Diseases(){
-        return $this->belongsToMany(Disease::class, 'disease_symptom','symptom_id','disease_id');
+        return $this->belongsToMany(Disease::class, 'disease_symptoms','symptom_id','disease_id');
     }
 }
