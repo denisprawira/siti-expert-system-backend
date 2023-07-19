@@ -78,25 +78,27 @@ class DiseaseController extends Controller
 
         $diseaseSymptoms = $this->getDiseaseSymptoms();
         $result = $this->inferenceEngine->forwardChaining($diseaseSymptoms, $request->input('data.symptoms'));
-        
-        $possibleDisease = $result->original;
- 
-        return $possibleDisease;
-        // if($possibleDisease!=null){
-        //     foreach($possibleDisease as $key => $value){
-        //         $patientDisease = PatientDisease::create([
-        //             'patient_id' => $patientId,
-        //             'disease_id' => $key,
-        //             'probability' => $value['percentage']
-        //         ]);
-        //     }
-        // }
-        // $result->original['result']['patient'] = $patient;
-        // return response()->json([
-        //     "status"  => "success",
-        //     "code"    => 200,
-        //     "data" => $result
-        // ]);
+
+
+        if($result != null) {
+            foreach($result['result'] as $key => $value) {
+               
+                $patientDisease = PatientDisease::create([
+                    'patient_id' => $patientId,
+                    'disease_id' => $key,
+                    'probability' => $value['percentage']
+                ]);
+                
+            }
+
+        }
+
+       $result['patient'] = $patient;
+        return response()->json([
+            "status"  => "success",
+            "code"    => 200,
+            "data" => $result
+        ]);
     }
 
     public function downloadReport()

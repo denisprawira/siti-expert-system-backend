@@ -71,10 +71,12 @@ class InferenceEngine
         $response["initial_symptoms"] = $initial_symptoms;
         $response["result"] = $result;
 
-        return response()->json([
+        $responseData = [
             'initial_symptoms' => $response["initial_symptoms"],
             'result' => $response["result"]
-        ]);
+        ];
+
+         return $responseData;
        
     }
 }
